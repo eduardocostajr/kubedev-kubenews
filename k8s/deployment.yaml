@@ -19,9 +19,9 @@ spec:
             - containerPort: 5432
           env:
           - name: POSTGRES_PASSWORD
-            value: "kube12345"
+            value: "Kube12345"
           - name: POSTGRES_USER
-            value: "fabio"
+            value: "KubeEduardo"
           - name: POSTGRES_DB
             value: "news"
 ---
@@ -34,14 +34,14 @@ spec:
     app: postgre
   ports:
   - port: 5432
-    targetPort: 5432
+    targetPort: 5432    
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kubenews
 spec:
-  replicas: 5
+  replicas: 2
   selector:
     matchLabels:
       app: kubenews
@@ -52,12 +52,12 @@ spec:
     spec:
       containers:
         - name: kubenews
-          image: fabiobala/kube-news:v1
+          image: eduardocostajr/kube-news:v1
           env:
           - name: DB_PASSWORD
-            value: "kube12345"
+            value: "Kube12345"
           - name: DB_USERNAME
-            value: "fabio"
+            value: "KubeEduardo"
           - name: DB_DATABASE
             value: "news"
           - name: DB_HOST
@@ -75,5 +75,3 @@ spec:
     targetPort: 8080
     nodePort: 30000
   type: LoadBalancer
-
-        
